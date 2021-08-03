@@ -3,9 +3,12 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31515.178
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PersonalInventoryAPI", "PersonalInventoryAPI.csproj", "{762394AB-1671-40E3-9844-A698D8AA1835}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PersonalInventoryAPI", "PersonalInventoryAPI.csproj", "{762394AB-1671-40E3-9844-A698D8AA1835}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PersonalInventoryAPI.Tests", "..\PersonalInventoryAPI.Tests\PersonalInventoryAPI.Tests.csproj", "{BC5B64F7-CF42-4995-A107-01D24D25AD30}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PersonalInventoryAPI.Tests", "..\PersonalInventoryAPI.Tests\PersonalInventoryAPI.Tests.csproj", "{BC5B64F7-CF42-4995-A107-01D24D25AD30}"
+	ProjectSection(ProjectDependencies) = postProject
+		{762394AB-1671-40E3-9844-A698D8AA1835} = {762394AB-1671-40E3-9844-A698D8AA1835}
+	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{4D43B1BF-1B03-4942-843E-960E9F0530DC}"
 EndProject

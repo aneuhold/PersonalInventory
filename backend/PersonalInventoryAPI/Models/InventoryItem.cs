@@ -1,10 +1,8 @@
-﻿using System;
+﻿using MongoDB.Bson;
+using PersonalInventoryAPI.Models.Interfaces;
 
 namespace PersonalInventoryAPI.Models {
   public class InventoryItem : IInventoryItem {
-    public Guid Id { get; }
-    public string Name { get; set; }
-    public string Location { get; set; }
 
     public InventoryItem(string name, string location) : this() {
       Name = name;
@@ -16,7 +14,7 @@ namespace PersonalInventoryAPI.Models {
     }
 
     public InventoryItem() {
-      Id = new Guid();
+      Id = ObjectId.GenerateNewId();
     }
   }
 }

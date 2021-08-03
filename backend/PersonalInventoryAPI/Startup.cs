@@ -4,19 +4,25 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
+using PersonalInventoryAPI.Contexts;
+using PersonalInventoryAPI.Models;
+using PersonalInventoryAPI.Models.Interfaces;
+using PersonalInventoryAPI.Repositories;
+using PersonalInventoryAPI.Repositories.Interfaces;
 
 namespace PersonalInventoryAPI {
   public class Startup {
+    public IConfiguration Configuration { get; }
+
     public Startup(IConfiguration configuration) {
       Configuration = configuration;
     }
 
-    public IConfiguration Configuration { get; }
-
     // This method gets called by the runtime. Use this method to add services to the container.
     public void ConfigureServices(IServiceCollection services) {
-
-      services.AddControllers();
+      AddDependencies(services);
+      services.AddControllers()
+        .AddNewtonsoftJson(options => options.UseMemberCasing()); ;
       services.AddSwaggerGen(c => {
         c.SwaggerDoc("v1", new OpenApiInfo { Title = "PersonalInventoryAPI", Version = "v1" });
       });
@@ -39,6 +45,13 @@ namespace PersonalInventoryAPI {
       app.UseEndpoints(endpoints => {
         endpoints.MapControllers();
       });
+    }
+
+    private void AddDependencies(IServiceCollection services) {
+      services.AddSingleton<MongoDbContext>()
+        .AddSingleton<IInventoryItemRepository, InventoryItemRepository>()
+        .AddTransient<IInventoryItem, InventoryItem>();
+
     }
   }
 }
