@@ -1,5 +1,7 @@
+using Autofac.Extensions.DependencyInjection;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Hosting;
+using System.IO;
 
 namespace PersonalInventoryAPI {
   public class Program {
@@ -9,8 +11,12 @@ namespace PersonalInventoryAPI {
 
     public static IHostBuilder CreateHostBuilder(string[] args) =>
         Host.CreateDefaultBuilder(args)
+            .UseServiceProviderFactory(new AutofacServiceProviderFactory())
             .ConfigureWebHostDefaults(webBuilder => {
-              webBuilder.UseStartup<Startup>();
+              webBuilder
+                .UseContentRoot(Directory.GetCurrentDirectory())
+                .UseIISIntegration()
+                .UseStartup<Startup>();
             });
   }
 }

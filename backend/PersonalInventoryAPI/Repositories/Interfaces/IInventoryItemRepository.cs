@@ -1,6 +1,6 @@
-﻿using PersonalInventoryAPI.Models.Interfaces;
+﻿using PersonalInventoryAPI.Models;
 
 namespace PersonalInventoryAPI.Repositories.Interfaces {
-  public interface IInventoryItemRepository : IRepository<IInventoryItem> {
+  public interface IInventoryItemRepository : IRepository<InventoryItem> {
   }
 }

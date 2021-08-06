@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using MongoDB.Bson;
 using PersonalInventoryAPI.Models;
-using PersonalInventoryAPI.Models.Interfaces;
 using PersonalInventoryAPI.Repositories.Interfaces;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -18,13 +17,13 @@ namespace PersonalInventoryAPI.Controllers {
 
     // GET: api/InventoryItems
     [HttpGet]
-    public async Task<IList<IInventoryItem>> GetInventoryItems() {
+    public async Task<IList<InventoryItem>> GetInventoryItems() {
       return await _repository.GetAllAsync();
     }
 
     // GET: api/InventoryItems/5
     [HttpGet("{id}")]
-    public async Task<IInventoryItem> GetInventoryItem(ObjectId id) {
+    public async Task<InventoryItem> GetInventoryItem(ObjectId id) {
       var inventoryItem = await _repository.GetByIdAsync(id);
 
       return inventoryItem;
@@ -43,10 +42,15 @@ namespace PersonalInventoryAPI.Controllers {
     // POST: api/InventoryItems
     // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
     [HttpPost]
-    public async Task<ActionResult<IInventoryItem>> PostInventoryItem(InventoryItem inventoryItem) {
+    public async Task<ActionResult<InventoryItem>> PostInventoryItem(InventoryItem inventoryItem) {
       await _repository.CreateOne(inventoryItem);
 
       return CreatedAtAction("GetInventoryItem", new { id = inventoryItem.Id }, inventoryItem);
+    }
+
+    [HttpDelete]
+    public async Task<ActionResult<long>> DeleteInventoryItems() {
+      return await _repository.DeleteAllAsync();
     }
   }
 }

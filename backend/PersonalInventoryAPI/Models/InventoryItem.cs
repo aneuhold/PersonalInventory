@@ -14,7 +14,7 @@ namespace PersonalInventoryAPI.Models {
     }
 
     public InventoryItem() {
-      Id = ObjectId.GenerateNewId();
+      Id = new ObjectId();
     }
   }
 }
