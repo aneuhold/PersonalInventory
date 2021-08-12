@@ -7,7 +7,7 @@ namespace PersonalInventoryAPI.Contexts {
     public DbSet<InventoryItem> InventoryItems { get; set; }
 
     public string DbPath { get; private set; }
-    public SqlDbContext() {
+    public SqlDbContext(DbContextOptions<SqlDbContext> options) : base(options) {
       var folder = Environment.SpecialFolder.LocalApplicationData;
       var path = Environment.GetFolderPath(folder);
       DbPath = $"{path}{System.IO.Path.DirectorySeparatorChar}personalInventory.db";
