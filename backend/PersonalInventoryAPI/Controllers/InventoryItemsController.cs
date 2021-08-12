@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 using MongoDB.Bson;
 using PersonalInventoryAPI.Models;
 using PersonalInventoryAPI.Repositories.Interfaces;
@@ -10,14 +11,17 @@ namespace PersonalInventoryAPI.Controllers {
   [ApiController]
   public class InventoryItemsController : ControllerBase {
     private readonly IInventoryItemRepository _repository;
+    private readonly ILogger _logger;
 
-    public InventoryItemsController(IInventoryItemRepository repository) {
+    public InventoryItemsController(IInventoryItemRepository repository, ILogger logger) {
       _repository = repository;
+      _logger = logger;
     }
 
     // GET: api/InventoryItems
     [HttpGet]
     public async Task<IList<InventoryItem>> GetInventoryItems() {
+      _logger.LogInformation("HTTP Get request made");
       return await _repository.GetAllAsync();
     }
 

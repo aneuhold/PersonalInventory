@@ -11,6 +11,7 @@ using PersonalInventoryAPI.Models;
 using PersonalInventoryAPI.Models.Interfaces;
 using PersonalInventoryAPI.Repositories;
 using PersonalInventoryAPI.Repositories.Interfaces;
+using Serilog;
 
 namespace PersonalInventoryAPI {
   public class Startup {
@@ -56,6 +57,8 @@ namespace PersonalInventoryAPI {
       }
 
       app.UseHttpsRedirection();
+
+      app.UseSerilogRequestLogging();
 
       app.UseRouting();
 
