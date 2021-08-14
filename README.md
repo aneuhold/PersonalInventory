@@ -11,5 +11,3 @@ Just a repo to play with ideas
 - Frontend
   - Angular
   - Maybe NX Framework
-
-This is a test commit
